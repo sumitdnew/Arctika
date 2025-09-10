@@ -729,36 +729,36 @@
                 </div>
                 
                 <div class="demo-interface">
-                    <h4 style="margin-bottom: 15px; color: #333;">Live Business Intelligence</h4>
+                    <h4 style="margin-bottom: 15px; color: #333;" data-translate="chat-title">Live Business Intelligence</h4>
                     <div class="chat-interface">
-                        <div class="chat-message user-message">
+                        <div class="chat-message user-message" data-translate="chat-user-1">
                             Our project completion rate dropped 15% this quarter. What should we do?
                         </div>
                         <div class="chat-message ai-message">
-                            <strong>🔍 Analysis Complete</strong><br><br>
+                            <strong data-translate="chat-ai-1-title">🔍 Analysis Complete</strong><br><br>
                             
-                            <strong>Root Cause Identified:</strong><br>
-                            Material delivery delays increased 40% (primary factor)<br>
-                            Weather-related stoppage up 25% (secondary)<br><br>
+                            <strong data-translate="chat-ai-1-root">Root Cause Identified:</strong><br>
+                            <span data-translate="chat-ai-1-delays">Material delivery delays increased 40% (primary factor)</span><br>
+                            <span data-translate="chat-ai-1-weather">Weather-related stoppage up 25% (secondary)</span><br><br>
                             
-                            <strong>📋 Recommended Actions (95% confidence):</strong><br>
-                            1. Switch to Supplier B for steel (historically 30% more reliable)<br>
-                            2. Implement 2-week material buffer policy<br>
-                            3. Add weather contingency clauses to new contracts<br><br>
+                            <strong data-translate="chat-ai-1-actions">📋 Recommended Actions (95% confidence):</strong><br>
+                            <span data-translate="chat-ai-1-action1">1. Switch to Supplier B for steel (historically 30% more reliable)</span><br>
+                            <span data-translate="chat-ai-1-action2">2. Implement 2-week material buffer policy</span><br>
+                            <span data-translate="chat-ai-1-action3">3. Add weather contingency clauses to new contracts</span><br><br>
                             
-                            <strong>💡 Predicted Impact:</strong><br>
-                            These changes should improve completion rate to 23% above baseline within 6 months.
+                            <strong data-translate="chat-ai-1-impact">💡 Predicted Impact:</strong><br>
+                            <span data-translate="chat-ai-1-result">These changes should improve completion rate to 23% above baseline within 6 months.</span>
                         </div>
-                        <div class="chat-message user-message">
+                        <div class="chat-message user-message" data-translate="chat-user-2">
                             What's the cost impact of switching suppliers?
                         </div>
                         <div class="chat-message ai-message">
-                            <strong>Cost Analysis:</strong><br>
-                            • 8% higher material cost (+$120K/quarter)<br>
-                            • Avoid 6 delayed projects (-$2.3M penalty costs)<br>
-                            • <span class="highlight-green">Net savings: $2.18M per quarter</span><br><br>
+                            <strong data-translate="chat-ai-2-title">Cost Analysis:</strong><br>
+                            <span data-translate="chat-ai-2-cost">• 8% higher material cost (+$120K/quarter)</span><br>
+                            <span data-translate="chat-ai-2-avoid">• Avoid 6 delayed projects (-$2.3M penalty costs)</span><br>
+                            • <span class="highlight-green" data-translate="chat-ai-2-savings">Net savings: $2.18M per quarter</span><br><br>
                             
-                            Shall I draft the supplier transition plan?
+                            <span data-translate="chat-ai-2-question">Shall I draft the supplier transition plan?</span>
                         </div>
                     </div>
                 </div>
@@ -776,33 +776,33 @@
             <div class="industries-grid">
                 <div class="industry-card">
                     <div class="industry-icon">🏗️</div>
-                    <h3>Construction</h3>
-                    <p>Project risk prediction, supplier optimization, weather contingency planning, cost overrun prevention</p>
+                    <h3 data-translate="industry-construction">Construction</h3>
+                    <p data-translate="industry-construction-desc">Project risk prediction, supplier optimization, weather contingency planning, cost overrun prevention</p>
                 </div>
                 <div class="industry-card">
                     <div class="industry-icon">🏥</div>
-                    <h3>Healthcare</h3>
-                    <p>Readmission prevention, resource allocation, treatment pathway optimization, quality improvement recommendations</p>
+                    <h3 data-translate="industry-healthcare">Healthcare</h3>
+                    <p data-translate="industry-healthcare-desc">Readmission prevention, resource allocation, treatment pathway optimization, quality improvement recommendations</p>
                 </div>
                 <div class="industry-card">
                     <div class="industry-icon">⚖️</div>
-                    <h3>Legal</h3>
-                    <p>Case outcome prediction, resource planning, deadline risk management, billing optimization strategies</p>
+                    <h3 data-translate="industry-legal">Legal</h3>
+                    <p data-translate="industry-legal-desc">Case outcome prediction, resource planning, deadline risk management, billing optimization strategies</p>
                 </div>
                 <div class="industry-card">
                     <div class="industry-icon">🏭</div>
-                    <h3>Manufacturing</h3>
-                    <p>Predictive maintenance, quality optimization, supply chain risk mitigation, production efficiency improvements</p>
+                    <h3 data-translate="industry-manufacturing">Manufacturing</h3>
+                    <p data-translate="industry-manufacturing-desc">Predictive maintenance, quality optimization, supply chain risk mitigation, production efficiency improvements</p>
                 </div>
                 <div class="industry-card">
                     <div class="industry-icon">🏪</div>
-                    <h3>Retail</h3>
-                    <p>Demand forecasting, inventory optimization, pricing strategies, customer retention recommendations</p>
+                    <h3 data-translate="industry-retail">Retail</h3>
+                    <p data-translate="industry-retail-desc">Demand forecasting, inventory optimization, pricing strategies, customer retention recommendations</p>
                 </div>
                 <div class="industry-card">
                     <div class="industry-icon">🚛</div>
-                    <h3>Logistics</h3>
-                    <p>Route optimization, capacity planning, delivery risk assessment, cost reduction strategies</p>
+                    <h3 data-translate="industry-logistics">Logistics</h3>
+                    <p data-translate="industry-logistics-desc">Route optimization, capacity planning, delivery risk assessment, cost reduction strategies</p>
                 </div>
             </div>
         </div>
@@ -949,7 +949,41 @@
                 'cta-button': 'Book Your Demo Today',
                 
                 // Footer
-                'footer-copyright': '© 2025 Arctika AI. All rights reserved.'
+                'footer-copyright': '© 2025 Arctika AI. All rights reserved.',
+                
+                // Chat Demo
+                'chat-title': 'Live Business Intelligence',
+                'chat-user-1': 'Our project completion rate dropped 15% this quarter. What should we do?',
+                'chat-ai-1-title': '🔍 Analysis Complete',
+                'chat-ai-1-root': 'Root Cause Identified:',
+                'chat-ai-1-delays': 'Material delivery delays increased 40% (primary factor)',
+                'chat-ai-1-weather': 'Weather-related stoppage up 25% (secondary)',
+                'chat-ai-1-actions': '📋 Recommended Actions (95% confidence):',
+                'chat-ai-1-action1': '1. Switch to Supplier B for steel (historically 30% more reliable)',
+                'chat-ai-1-action2': '2. Implement 2-week material buffer policy',
+                'chat-ai-1-action3': '3. Add weather contingency clauses to new contracts',
+                'chat-ai-1-impact': '💡 Predicted Impact:',
+                'chat-ai-1-result': 'These changes should improve completion rate to 23% above baseline within 6 months.',
+                'chat-user-2': 'What\'s the cost impact of switching suppliers?',
+                'chat-ai-2-title': 'Cost Analysis:',
+                'chat-ai-2-cost': '• 8% higher material cost (+$120K/quarter)',
+                'chat-ai-2-avoid': '• Avoid 6 delayed projects (-$2.3M penalty costs)',
+                'chat-ai-2-savings': '• Net savings: $2.18M per quarter',
+                'chat-ai-2-question': 'Shall I draft the supplier transition plan?',
+                
+                // Industries
+                'industry-construction': 'Construction',
+                'industry-construction-desc': 'Project risk prediction, supplier optimization, weather contingency planning, cost overrun prevention',
+                'industry-healthcare': 'Healthcare',
+                'industry-healthcare-desc': 'Readmission prevention, resource allocation, treatment pathway optimization, quality improvement recommendations',
+                'industry-legal': 'Legal',
+                'industry-legal-desc': 'Case outcome prediction, resource planning, deadline risk management, billing optimization strategies',
+                'industry-manufacturing': 'Manufacturing',
+                'industry-manufacturing-desc': 'Predictive maintenance, quality optimization, supply chain risk mitigation, production efficiency improvements',
+                'industry-retail': 'Retail',
+                'industry-retail-desc': 'Demand forecasting, inventory optimization, pricing strategies, customer retention recommendations',
+                'industry-logistics': 'Logistics',
+                'industry-logistics-desc': 'Route optimization, capacity planning, delivery risk assessment, cost reduction strategies'
             },
             es: {
                 // Navigation
@@ -1000,7 +1034,41 @@
                 'cta-button': 'Reserva tu Demo Hoy',
                 
                 // Footer
-                'footer-copyright': '© 2025 Arctika AI. Todos los derechos reservados.'
+                'footer-copyright': '© 2025 Arctika AI. Todos los derechos reservados.',
+                
+                // Chat Demo
+                'chat-title': 'Inteligencia de Negocios en Vivo',
+                'chat-user-1': 'Nuestra tasa de finalización de proyectos cayó 15% este trimestre. ¿Qué deberíamos hacer?',
+                'chat-ai-1-title': '🔍 Análisis Completo',
+                'chat-ai-1-root': 'Causa Raíz Identificada:',
+                'chat-ai-1-delays': 'Los retrasos en entrega de materiales aumentaron 40% (factor primario)',
+                'chat-ai-1-weather': 'Paradas por clima subieron 25% (secundario)',
+                'chat-ai-1-actions': '📋 Acciones Recomendadas (95% confianza):',
+                'chat-ai-1-action1': '1. Cambiar al Proveedor B para acero (históricamente 30% más confiable)',
+                'chat-ai-1-action2': '2. Implementar política de buffer de materiales de 2 semanas',
+                'chat-ai-1-action3': '3. Agregar cláusulas de contingencia climática a nuevos contratos',
+                'chat-ai-1-impact': '💡 Impacto Predicho:',
+                'chat-ai-1-result': 'Estos cambios deberían mejorar la tasa de finalización a 23% por encima de la línea base en 6 meses.',
+                'chat-user-2': '¿Cuál es el impacto en costos de cambiar proveedores?',
+                'chat-ai-2-title': 'Análisis de Costos:',
+                'chat-ai-2-cost': '• 8% mayor costo de materiales (+$120K/trimestre)',
+                'chat-ai-2-avoid': '• Evitar 6 proyectos retrasados (-$2.3M costos de penalización)',
+                'chat-ai-2-savings': '• Ahorro neto: $2.18M por trimestre',
+                'chat-ai-2-question': '¿Debo redactar el plan de transición de proveedores?',
+                
+                // Industries
+                'industry-construction': 'Construcción',
+                'industry-construction-desc': 'Predicción de riesgos de proyecto, optimización de proveedores, planificación de contingencias climáticas, prevención de sobrecostos',
+                'industry-healthcare': 'Salud',
+                'industry-healthcare-desc': 'Prevención de readmisiones, asignación de recursos, optimización de vías de tratamiento, recomendaciones de mejora de calidad',
+                'industry-legal': 'Legal',
+                'industry-legal-desc': 'Predicción de resultados de casos, planificación de recursos, gestión de riesgos de plazos, estrategias de optimización de facturación',
+                'industry-manufacturing': 'Manufactura',
+                'industry-manufacturing-desc': 'Mantenimiento predictivo, optimización de calidad, mitigación de riesgos de cadena de suministro, mejoras de eficiencia de producción',
+                'industry-retail': 'Retail',
+                'industry-retail-desc': 'Pronóstico de demanda, optimización de inventario, estrategias de precios, recomendaciones de retención de clientes',
+                'industry-logistics': 'Logística',
+                'industry-logistics-desc': 'Optimización de rutas, planificación de capacidad, evaluación de riesgos de entrega, estrategias de reducción de costos'
             }
         };
 
