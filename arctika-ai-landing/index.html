@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arctika AI - ChatGPT for Your Business Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #59BEDE 0%, #A7D3E9 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .cta-nav {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .cta-nav:hover {
+            background: white;
+            color: #59BEDE;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+        
+        .language-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            min-width: 120px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+            border-radius: 10px;
+        }
+        
+        .language-option:hover {
+            background: #f8f9fa;
+        }
+        
+        .language-option.active {
+            background: #59BEDE;
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #59BEDE 0%, #A7D3E9 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: #C6ED72;
+            color: #333;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid #C6ED72;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #59BEDE;
+        }
+        
+        /* Problem Section */
+        .problem-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .problem-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #59BEDE 0%, #A7D3E9 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .problem-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Solution Section */
+        .solution-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .solution-demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .demo-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .demo-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            background: linear-gradient(135deg, #59BEDE 0%, #A7D3E9 100%);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .demo-interface {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .chat-interface {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background: #59BEDE;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .ai-message {
+            background: #f1f3f4;
+            color: #333;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Industries Section */
+        .industries-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .industry-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-top: 4px solid #C6ED72;
+        }
+        
+        .industry-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .industry-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .industry-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: #59BEDE;
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border-color: #59BEDE;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(89, 190, 222, 0.05) 0%, rgba(167, 211, 233, 0.05) 100%);
+        }
+        
+        .pricing-badge {
+            background: linear-gradient(135deg, #C6ED72 0%, #59BEDE 100%);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #59BEDE;
+            margin-bottom: 10px;
+        }
+        
+        .price-period {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 8px 0;
+            color: #666;
+        }
+        
+        .pricing-features li::before {
+            content: "✓";
+            color: #C6ED72;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #59BEDE 0%, #A7D3E9 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .cta-section .btn-primary {
+            background: #C6ED72;
+            color: #333;
+            border-color: #C6ED72;
+        }
+        
+        .cta-section .btn-primary:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .solution-demo {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Accent colors for highlights */
+        .highlight-green {
+            color: #C6ED72;
+            font-weight: bold;
+        }
+
+        .highlight-blue {
+            color: #59BEDE;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Gem body with blue gradient -->
+                            <defs>
+                                <linearGradient id="gemGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#4682B4;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#191970;stop-opacity:1" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                    <feMerge> 
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            
+                            <!-- Main gem shape -->
+                            <polygon points="50,10 70,25 75,50 65,75 50,90 35,75 25,50 30,25" 
+                                     fill="url(#gemGradient)" 
+                                     stroke="#2F4F4F" 
+                                     stroke-width="0.5"/>
+                            
+                            <!-- Facet lines for 3D effect -->
+                            <polygon points="50,10 70,25 50,30" fill="#B0E0E6" opacity="0.6"/>
+                            <polygon points="50,10 30,25 50,30" fill="#87CEEB" opacity="0.4"/>
+                            <polygon points="70,25 75,50 65,45" fill="#4682B4" opacity="0.5"/>
+                            <polygon points="30,25 25,50 35,45" fill="#5F9EA0" opacity="0.5"/>
+                            
+                            <!-- Neon green line with nodes -->
+                            <path d="M 45 20 L 55 35 L 60 50" 
+                                  stroke="#00FF7F" 
+                                  stroke-width="2" 
+                                  fill="none" 
+                                  filter="url(#glow)"/>
+                            
+                            <!-- Green nodes -->
+                            <circle cx="45" cy="20" r="3" fill="#00FF7F" filter="url(#glow)"/>
+                            <circle cx="55" cy="35" r="3" fill="#00FF7F" filter="url(#glow)"/>
+                            <circle cx="60" cy="50" r="3" fill="#00FF7F" filter="url(#glow)"/>
+                        </svg>
+                    </div>
+                    <span>Arctika AI</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#solution" data-translate="nav-solution">Solution</a></li>
+                    <li><a href="#industries" data-translate="nav-industries">Industries</a></li>
+                    <li><a href="#pricing" data-translate="nav-pricing">Pricing</a></li>
+                    <li><a href="#contact" data-translate="nav-contact">Contact</a></li>
+                </ul>
+                <div class="language-switcher">
+                    <button class="language-btn" id="currentLang">
+                        <span id="langFlag">🇺🇸</span>
+                        <span id="langText">EN</span>
+                        <span>▼</span>
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" class="language-option active" data-lang="en" data-flag="🇺🇸">
+                            <span>🇺🇸</span> English
+                        </a>
+                        <a href="#" class="language-option" data-lang="es" data-flag="🇦🇷">
+                            <span>🇦🇷</span> Español
+                        </a>
+                    </div>
+                </div>
+                <a href="mailto:info.arctika@proton.me" class="cta-nav" data-translate="nav-demo">Book Demo</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 data-translate="hero-title">ChatGPT for Your Business Data</h1>
+            <p class="subtitle" data-translate="hero-subtitle">Replace dozens of static dashboards with one intelligent AI that answers any business question instantly using your own data - plus get smart recommendations on what to do next.</p>
+            <div class="cta-buttons">
+                <a href="mailto:info.arctika@proton.me" class="btn-primary" data-translate="hero-demo">See Live Demo</a>
+                <a href="mailto:info.arctika@proton.me" class="btn-secondary" data-translate="hero-pricing">View Pricing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="problem-title">Stop Building Dashboards. Start Asking Questions.</h2>
+                <p data-translate="problem-subtitle">Traditional business intelligence is broken. Every new question requires weeks of development.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">⏱️</div>
+                    <h3 data-translate="problem-1-title">Reporting Without Insight</h3>
+                    <p data-translate="problem-1-desc">Your dashboards show what happened, but never tell you what to do about it. You're drowning in data but starved for actionable decisions.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">💰</div>
+                    <h3 data-translate="problem-2-title">Reactive Decision Making</h3>
+                    <p data-translate="problem-2-desc">By the time problems show up in reports, it's too late. You need foresight, not hindsight.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📊</div>
+                    <h3 data-translate="problem-3-title">No Strategic Guidance</h3>
+                    <p data-translate="problem-3-desc">Charts and graphs don't make decisions. You need intelligent recommendations based on industry best practices and predictive insights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" id="solution">
+        <div class="container">
+            <div class="solution-demo">
+                <div class="demo-content">
+                    <h2 data-translate="solution-title">AI That Thinks Ahead For You</h2>
+                    <p data-translate="solution-desc">Our platform doesn't just answer questions - it identifies opportunities, predicts problems, and recommends specific actions based on industry best practices and your historical data.</p>
+                    
+                    <ul class="feature-list">
+                        <li data-translate="feature-1">Proactive risk identification and early warning alerts</li>
+                        <li data-translate="feature-2">Evidence-based recommendations with confidence scores</li>
+                        <li data-translate="feature-3">Strategic guidance from industry best practices</li>
+                        <li data-translate="feature-4">Predictive insights to prevent problems before they occur</li>
+                        <li data-translate="feature-5">Decision support with multiple options and trade-offs</li>
+                        <li data-translate="feature-6">Automated optimization suggestions for ongoing improvement</li>
+                    </ul>
+                    
+                    <a href="mailto:info.arctika@proton.me" class="btn-primary" data-translate="solution-demo">See Decision Intelligence Demo</a>
+                </div>
+                
+                <div class="demo-interface">
+                    <h4 style="margin-bottom: 15px; color: #333;">Live Business Intelligence</h4>
+                    <div class="chat-interface">
+                        <div class="chat-message user-message">
+                            Our project completion rate dropped 15% this quarter. What should we do?
+                        </div>
+                        <div class="chat-message ai-message">
+                            <strong>🔍 Analysis Complete</strong><br><br>
+                            
+                            <strong>Root Cause Identified:</strong><br>
+                            Material delivery delays increased 40% (primary factor)<br>
+                            Weather-related stoppage up 25% (secondary)<br><br>
+                            
+                            <strong>📋 Recommended Actions (95% confidence):</strong><br>
+                            1. Switch to Supplier B for steel (historically 30% more reliable)<br>
+                            2. Implement 2-week material buffer policy<br>
+                            3. Add weather contingency clauses to new contracts<br><br>
+                            
+                            <strong>💡 Predicted Impact:</strong><br>
+                            These changes should improve completion rate to 23% above baseline within 6 months.
+                        </div>
+                        <div class="chat-message user-message">
+                            What's the cost impact of switching suppliers?
+                        </div>
+                        <div class="chat-message ai-message">
+                            <strong>Cost Analysis:</strong><br>
+                            • 8% higher material cost (+$120K/quarter)<br>
+                            • Avoid 6 delayed projects (-$2.3M penalty costs)<br>
+                            • <span class="highlight-green">Net savings: $2.18M per quarter</span><br><br>
+                            
+                            Shall I draft the supplier transition plan?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries-section" id="industries">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="industries-title">Built for Your Industry</h2>
+                <p data-translate="industries-subtitle">Pre-trained models that understand your business domain and terminology</p>
+            </div>
+            <div class="industries-grid">
+                <div class="industry-card">
+                    <div class="industry-icon">🏗️</div>
+                    <h3>Construction</h3>
+                    <p>Project risk prediction, supplier optimization, weather contingency planning, cost overrun prevention</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🏥</div>
+                    <h3>Healthcare</h3>
+                    <p>Readmission prevention, resource allocation, treatment pathway optimization, quality improvement recommendations</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">⚖️</div>
+                    <h3>Legal</h3>
+                    <p>Case outcome prediction, resource planning, deadline risk management, billing optimization strategies</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🏭</div>
+                    <h3>Manufacturing</h3>
+                    <p>Predictive maintenance, quality optimization, supply chain risk mitigation, production efficiency improvements</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🏪</div>
+                    <h3>Retail</h3>
+                    <p>Demand forecasting, inventory optimization, pricing strategies, customer retention recommendations</p>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🚛</div>
+                    <h3>Logistics</h3>
+                    <p>Route optimization, capacity planning, delivery risk assessment, cost reduction strategies</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-translate="pricing-title">Simple, Transparent Pricing</h2>
+                <p data-translate="pricing-subtitle">Deploy in weeks, not months. Pay for results, not consulting hours.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$5K</div>
+                    <div class="price-period">per month + $15K setup</div>
+                    <ul class="pricing-features">
+                        <li>Up to 50 users</li>
+                        <li>Basic recommendations & alerts</li>
+                        <li>Single industry model</li>
+                        <li>Standard integrations</li>
+                        <li>3 automated decision agents</li>
+                        <li>Email support</li>
+                        <li>On-premises deployment</li>
+                    </ul>
+                    <a href="mailto:info.arctika@proton.me" class="btn-primary">Get Started</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$15K</div>
+                    <div class="price-period">per month + $35K setup</div>
+                    <ul class="pricing-features">
+                        <li>Up to 200 users</li>
+                        <li>Predictive analytics & recommendations</li>
+                        <li>Multi-industry capability</li>
+                        <li>Advanced integrations</li>
+                        <li>10 intelligent decision agents</li>
+                        <li>Strategic planning assistance</li>
+                        <li>Priority support</li>
+                        <li>Cloud or on-premises</li>
+                        <li>Custom recommendation models</li>
+                    </ul>
+                    <a href="mailto:info.arctika@proton.me" class="btn-primary">Get Started</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$35K</div>
+                    <div class="price-period">per month + $75K setup</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited users</li>
+                        <li>Advanced decision intelligence</li>
+                        <li>White-label options</li>
+                        <li>Enterprise integrations</li>
+                        <li>Unlimited intelligent agents</li>
+                        <li>Strategic advisory AI</li>
+                        <li>Dedicated success manager</li>
+                        <li>99.9% SLA</li>
+                        <li>Advanced security features</li>
+                        <li>Custom industry models</li>
+                    </ul>
+                    <a href="mailto:info.arctika@proton.me" class="btn-primary">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="demo">
+        <div class="container">
+            <h2 data-translate="cta-title">See It In Action</h2>
+            <p data-translate="cta-subtitle">Book a 30-minute demo and see how our AI can transform your business intelligence</p>
+            <a href="mailto:info.arctika@proton.me" class="btn-primary" data-translate="cta-button">Book Your Demo Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-links">
+                <a href="mailto:info.arctika@proton.me">info.arctika@proton.me</a>
+                <a href="tel:+5492477603569">+54 9 2477 60-3569</a>
+                <a href="https://www.linkedin.com/company/arctika/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#security">Security</a>
+            </div>
+            <p data-translate="footer-copyright">&copy; 2025 Arctika AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                // Navigation
+                'nav-solution': 'Solution',
+                'nav-industries': 'Industries', 
+                'nav-pricing': 'Pricing',
+                'nav-contact': 'Contact',
+                'nav-demo': 'Book Demo',
+                
+                // Hero Section
+                'hero-title': 'ChatGPT for Your Business Data',
+                'hero-subtitle': 'Replace dozens of static dashboards with one intelligent AI that answers any business question instantly using your own data - plus get smart recommendations on what to do next.',
+                'hero-demo': 'See Live Demo',
+                'hero-pricing': 'View Pricing',
+                
+                // Problem Section
+                'problem-title': 'Stop Building Dashboards. Start Asking Questions.',
+                'problem-subtitle': 'Traditional business intelligence is broken. Every new question requires weeks of development.',
+                'problem-1-title': 'Reporting Without Insight',
+                'problem-1-desc': 'Your dashboards show what happened, but never tell you what to do about it. You\'re drowning in data but starved for actionable decisions.',
+                'problem-2-title': 'Reactive Decision Making',
+                'problem-2-desc': 'By the time problems show up in reports, it\'s too late. You need foresight, not hindsight.',
+                'problem-3-title': 'No Strategic Guidance',
+                'problem-3-desc': 'Charts and graphs don\'t make decisions. You need intelligent recommendations based on industry best practices and predictive insights.',
+                
+                // Solution Section
+                'solution-title': 'AI That Thinks Ahead For You',
+                'solution-desc': 'Our platform doesn\'t just answer questions - it identifies opportunities, predicts problems, and recommends specific actions based on industry best practices and your historical data.',
+                'feature-1': 'Proactive risk identification and early warning alerts',
+                'feature-2': 'Evidence-based recommendations with confidence scores',
+                'feature-3': 'Strategic guidance from industry best practices',
+                'feature-4': 'Predictive insights to prevent problems before they occur',
+                'feature-5': 'Decision support with multiple options and trade-offs',
+                'feature-6': 'Automated optimization suggestions for ongoing improvement',
+                'solution-demo': 'See Decision Intelligence Demo',
+                
+                // Industries Section
+                'industries-title': 'Built for Your Industry',
+                'industries-subtitle': 'Pre-trained models that understand your business domain and terminology',
+                
+                // Pricing Section
+                'pricing-title': 'Simple, Transparent Pricing',
+                'pricing-subtitle': 'Deploy in weeks, not months. Pay for results, not consulting hours.',
+                
+                // CTA Section
+                'cta-title': 'See It In Action',
+                'cta-subtitle': 'Book a 30-minute demo and see how our AI can transform your business intelligence',
+                'cta-button': 'Book Your Demo Today',
+                
+                // Footer
+                'footer-copyright': '© 2025 Arctika AI. All rights reserved.'
+            },
+            es: {
+                // Navigation
+                'nav-solution': 'Solución',
+                'nav-industries': 'Industrias',
+                'nav-pricing': 'Precios',
+                'nav-contact': 'Contacto',
+                'nav-demo': 'Reservar Demo',
+                
+                // Hero Section
+                'hero-title': 'ChatGPT para los Datos de tu Empresa',
+                'hero-subtitle': 'Reemplaza docenas de tableros estáticos con una IA inteligente que responde cualquier pregunta de negocio instantáneamente usando tus propios datos - además obtén recomendaciones inteligentes sobre qué hacer a continuación.',
+                'hero-demo': 'Ver Demo en Vivo',
+                'hero-pricing': 'Ver Precios',
+                
+                // Problem Section
+                'problem-title': 'Deja de Construir Tableros. Comienza a Hacer Preguntas.',
+                'problem-subtitle': 'La inteligencia de negocios tradicional está rota. Cada nueva pregunta requiere semanas de desarrollo.',
+                'problem-1-title': 'Reportes Sin Perspectiva',
+                'problem-1-desc': 'Tus tableros muestran lo que pasó, pero nunca te dicen qué hacer al respecto. Te ahogas en datos pero tienes hambre de decisiones accionables.',
+                'problem-2-title': 'Toma de Decisiones Reactiva',
+                'problem-2-desc': 'Para cuando los problemas aparecen en los reportes, ya es demasiado tarde. Necesitas previsión, no retrospectiva.',
+                'problem-3-title': 'Sin Orientación Estratégica',
+                'problem-3-desc': 'Los gráficos y tablas no toman decisiones. Necesitas recomendaciones inteligentes basadas en mejores prácticas de la industria e insights predictivos.',
+                
+                // Solution Section
+                'solution-title': 'IA Que Piensa Adelante Por Ti',
+                'solution-desc': 'Nuestra plataforma no solo responde preguntas - identifica oportunidades, predice problemas y recomienda acciones específicas basadas en mejores prácticas de la industria y tus datos históricos.',
+                'feature-1': 'Identificación proactiva de riesgos y alertas tempranas',
+                'feature-2': 'Recomendaciones basadas en evidencia con puntuaciones de confianza',
+                'feature-3': 'Orientación estratégica de mejores prácticas de la industria',
+                'feature-4': 'Insights predictivos para prevenir problemas antes de que ocurran',
+                'feature-5': 'Soporte de decisiones con múltiples opciones y compensaciones',
+                'feature-6': 'Sugerencias de optimización automatizada para mejora continua',
+                'solution-demo': 'Ver Demo de Inteligencia de Decisiones',
+                
+                // Industries Section
+                'industries-title': 'Construido para tu Industria',
+                'industries-subtitle': 'Modelos pre-entrenados que entienden tu dominio de negocio y terminología',
+                
+                // Pricing Section
+                'pricing-title': 'Precios Simples y Transparentes',
+                'pricing-subtitle': 'Despliega en semanas, no meses. Paga por resultados, no por horas de consultoría.',
+                
+                // CTA Section
+                'cta-title': 'Véelo en Acción',
+                'cta-subtitle': 'Reserva una demo de 30 minutos y ve cómo nuestra IA puede transformar tu inteligencia de negocios',
+                'cta-button': 'Reserva tu Demo Hoy',
+                
+                // Footer
+                'footer-copyright': '© 2025 Arctika AI. Todos los derechos reservados.'
+            }
+        };
+
+        // Language switching functionality
+        function switchLanguage(lang) {
+            const currentLang = document.getElementById('currentLang');
+            const langFlag = document.getElementById('langFlag');
+            const langText = document.getElementById('langText');
+            
+            // Update button
+            const flag = lang === 'en' ? '🇺🇸' : '🇦🇷';
+            const text = lang === 'en' ? 'EN' : 'ES';
+            langFlag.textContent = flag;
+            langText.textContent = text;
+            
+            // Update active state
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.lang === lang) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Update content
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Store preference
+            localStorage.setItem('preferred-language', lang);
+        }
+
+        // Initialize language switcher
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up language option click handlers
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.dataset.lang;
+                    switchLanguage(lang);
+                });
+            });
+            
+            // Load saved language preference
+            const savedLang = localStorage.getItem('preferred-language') || 'en';
+            switchLanguage(savedLang);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Demo chat animation
+        function animateChat() {
+            const messages = document.querySelectorAll('.chat-message');
+            messages.forEach((msg, index) => {
+                msg.style.opacity = '0';
+                msg.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    msg.style.opacity = '1';
+                    msg.style.transform = 'translateY(0)';
+                    msg.style.transition = 'all 0.5s ease';
+                }, index * 1000);
+            });
+        }
+
+        // Animate chat when page loads
+        window.addEventListener('load', () => {
+            setTimeout(animateChat, 2000);
+        });
+
+        // Industry card interactions
+        document.querySelectorAll('.industry-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const industry = this.querySelector('h3').textContent;
+                const currentLang = localStorage.getItem('preferred-language') || 'en';
+                const message = currentLang === 'es' 
+                    ? `¡Aprende más sobre nuestra solución de ${industry}! Contáctanos para una demo personalizada.`
+                    : `Learn more about our ${industry} solution! Contact us for a custom demo.`;
+                alert(message);
+            });
+        });
+    </script>
+</body>
+</html>
