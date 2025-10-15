@@ -780,7 +780,7 @@ export default function TransformationForm() {
               <div className="flex items-center">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 mr-3 sm:mr-4 flex-shrink-0">
                   <img 
-                    src="/Images/logo.png" 
+                    src="/logo.png" 
                     alt="Arctika Logo" 
                     className="w-full h-full object-contain"
                   />
@@ -964,7 +964,7 @@ export default function TransformationForm() {
             <div className="flex items-center">
               <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mr-3 sm:mr-4 lg:mr-6 flex-shrink-0">
                 <img 
-                  src="/Images/logo.png" 
+                  src="/logo.png" 
                   alt="Arctika Logo" 
                   className="w-full h-full object-contain"
                 />
