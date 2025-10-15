@@ -5,8 +5,8 @@
 CREATE TABLE IF NOT EXISTS transformation_assessments (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  client_name TEXT NOT NULL,
-  client_email TEXT NOT NULL,
+  client_name TEXT,
+  client_email TEXT,
   company_name TEXT,
   industry TEXT,
   company_size TEXT,
@@ -18,12 +18,20 @@ CREATE TABLE IF NOT EXISTS transformation_assessments (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- If the table already exists, add the new columns
+-- If the table already exists, add the new columns and modify existing ones
 ALTER TABLE transformation_assessments 
 ADD COLUMN IF NOT EXISTS company_name TEXT,
 ADD COLUMN IF NOT EXISTS industry TEXT,
 ADD COLUMN IF NOT EXISTS company_size TEXT,
-ADD COLUMN IF NOT EXISTS proposal TEXT;
+ADD COLUMN IF NOT EXISTS proposal TEXT,
+ADD COLUMN IF NOT EXISTS progress_key TEXT UNIQUE,
+ADD COLUMN IF NOT EXISTS language TEXT DEFAULT 'en',
+ADD COLUMN IF NOT EXISTS current_section INTEGER DEFAULT 0,
+ADD COLUMN IF NOT EXISTS form_data JSONB,
+ADD COLUMN IF NOT EXISTS chat_responses JSONB,
+ADD COLUMN IF NOT EXISTS company_context JSONB,
+ALTER COLUMN client_name DROP NOT NULL,
+ALTER COLUMN client_email DROP NOT NULL;
 
 -- Create an index on client_email for faster queries
 CREATE INDEX IF NOT EXISTS idx_transformation_assessments_email 
@@ -36,6 +44,10 @@ ON transformation_assessments(timestamp DESC);
 -- Create an index on industry for analytics queries
 CREATE INDEX IF NOT EXISTS idx_transformation_assessments_industry 
 ON transformation_assessments(industry);
+
+-- Create an index on progress_key for faster retrieval
+CREATE INDEX IF NOT EXISTS idx_transformation_assessments_progress_key 
+ON transformation_assessments(progress_key);
 
 -- Create an updated_at trigger
 CREATE OR REPLACE FUNCTION update_updated_at_column()
