@@ -111,9 +111,13 @@ Format: ["suggestion 1", "suggestion 2", "suggestion 3", "suggestion 4"]`;
 };
 
 // Extract contact info
-export const extractContactInfo = async (userMessage) => {
+export const extractContactInfo = async (userMessage, language = 'en') => {
   try {
-    const systemPrompt = `Extract the person's name and email from the following message. 
+    const systemPrompt = language === 'es' 
+      ? `Extrae el nombre y email de la persona del siguiente mensaje. 
+Devuelve SOLO un objeto JSON con los campos "name" y "email". Si no puedes encontrar alguno, usa null.
+Ejemplo: {"name": "Juan Pérez", "email": "juan@ejemplo.com"}`
+      : `Extract the person's name and email from the following message. 
 Return ONLY a JSON object with "name" and "email" fields. If you can't find either, use null.
 Example: {"name": "John Doe", "email": "john@example.com"}`;
 
@@ -156,9 +160,17 @@ Example: {"name": "John Doe", "email": "john@example.com"}`;
 };
 
 // Extract company info
-export const extractCompanyInfo = async (userMessage) => {
+export const extractCompanyInfo = async (userMessage, language = 'en') => {
   try {
-    const systemPrompt = `Extract company information from the following message. 
+    const systemPrompt = language === 'es'
+      ? `Extrae información de la empresa del siguiente mensaje. 
+Devuelve SOLO un objeto JSON con los campos "companyName", "industry", y "companySize".
+Para industria, identifica el nombre EXACTO de la industria mencionado (ej., "Petróleo y Gas", "Energía Renovable", "Manufactura", etc.)
+Para companySize, categoriza en: Pequeña (1-50), Mediana (51-500), Grande (501+), Empresa (5000+)
+Sé flexible y captura cualquier industria mencionada por el usuario exactamente como se dijo.
+Si no puedes encontrar un campo, usa null.
+Ejemplo: {"companyName": "SolarTech", "industry": "Energía Renovable", "companySize": "Mediana (51-500)"}`
+      : `Extract company information from the following message. 
 Return ONLY a JSON object with "companyName", "industry", and "companySize" fields.
 For industry, identify the EXACT industry name as mentioned (e.g., "Oil & Gas", "Renewable Energy", "Manufacturing", etc.)
 For companySize, categorize into: Small (1-50), Medium (51-500), Large (501+), Enterprise (5000+)
@@ -205,9 +217,20 @@ Example: {"companyName": "SolarTech", "industry": "Renewable Energy", "companySi
 };
 
 // Generate next question transition
-export const generateNextQuestion = async (sectionTitle, questionText, previousAnswer, allContext) => {
+export const generateNextQuestion = async (sectionTitle, questionText, previousAnswer, allContext, language = 'en') => {
   try {
-    const systemPrompt = `You are guiding a business transformation assessment. 
+    const systemPrompt = language === 'es'
+      ? `Estás guiando una evaluación de transformación empresarial. 
+Genera una transición natural que:
+1. Reconozca brevemente su respuesta anterior (1 oración)
+2. Lleve a la siguiente pregunta suavemente
+
+Sección Actual: ${sectionTitle}
+Siguiente Pregunta: ${questionText}
+Su Última Respuesta: ${previousAnswer}
+
+Manténlo conversacional y bajo 3 oraciones en total.`
+      : `You are guiding a business transformation assessment. 
 Generate a natural transition that:
 1. Briefly acknowledges their previous answer (1 sentence)
 2. Leads into the next question smoothly
@@ -252,9 +275,11 @@ Keep it conversational and under 3 sentences total.`;
 };
 
 // Summarize section
-export const summarizeSection = async (sectionTitle, responses) => {
+export const summarizeSection = async (sectionTitle, responses, language = 'en') => {
   try {
-    const systemPrompt = `Provide a brief, encouraging 1-sentence summary acknowledging what was covered in the ${sectionTitle} section.`;
+    const systemPrompt = language === 'es'
+      ? `Proporciona un resumen breve y alentador de 1 oración reconociendo lo que se cubrió en la sección ${sectionTitle}.`
+      : `Provide a brief, encouraging 1-sentence summary acknowledging what was covered in the ${sectionTitle} section.`;
     const responsesText = Object.values(responses).join(' | ');
 
     let response;
@@ -291,7 +316,7 @@ export const summarizeSection = async (sectionTitle, responses) => {
 };
 
 // Generate comprehensive transformation proposal
-export const generateTransformationProposal = async (companyContext, allResponses, sections) => {
+export const generateTransformationProposal = async (companyContext, allResponses, sections, language = 'en') => {
   try {
     const { companyName, industry, companySize } = companyContext;
     
@@ -308,7 +333,119 @@ export const generateTransformationProposal = async (companyContext, allResponse
       });
     });
     
-    const systemPrompt = `You are a senior digital transformation consultant with expertise in ${industry}. 
+    const systemPrompt = language === 'es'
+      ? `Eres un consultor senior de transformación digital con experiencia en ${industry}.
+      
+Analiza la siguiente evaluación empresarial y crea una propuesta de transformación integral y accionable.
+
+Perfil de la Empresa:
+- Nombre: ${companyName}
+- Industria: ${industry}
+- Tamaño: ${companySize}
+
+Respuestas de la Evaluación:
+${responsesSummary}
+
+Genera una propuesta DETALLADA con las siguientes secciones:
+
+## 1. RESUMEN EJECUTIVO
+Escribe 2-3 párrafos que:
+- Destaquen los principales desafíos empresariales identificados
+- Presenten la oportunidad de transformación
+- Establezcan el impacto empresarial esperado
+- Sean específicos al contexto de la industria ${industry}
+
+## 2. OBJETIVOS
+Lista 5-7 objetivos específicos y medibles que la transformación logrará. Cada uno debe:
+- Comenzar con verbos de acción (Desarrollar, Implementar, Crear, Mejorar, etc.)
+- Ser específico a sus objetivos y desafíos declarados
+- Ser medible y con límite de tiempo
+- Abordar directamente sus puntos de dolor
+
+## 3. SOLUCIONES RECOMENDADAS Y ENTREGABLES
+Para cada área de solución principal, proporciona:
+- **Nombre de la Solución**: Descripción breve
+- **Entregables Clave**: 
+  - Salidas específicas (sistemas, tableros, modelos, reportes)
+  - Tecnologías/plataformas a implementar
+  - Puntos de integración con sistemas existentes
+- **Valor Empresarial**: Cómo esto aborda sus desafíos
+
+Cubre áreas como:
+- Implementaciones de IA/ML
+- Automatización de procesos
+- Infraestructura de datos
+- Análisis e Inteligencia de Negocios
+- Integraciones de sistemas
+
+## 4. CRONOGRAMA DE IMPLEMENTACIÓN
+Divide en 4 fases con duraciones específicas:
+- **Fase 1** (Ganancias Rápidas): 2-4 semanas - Lo que se entregará
+- **Fase 2** (Fundación): 6-8 semanas - Lo que se construirá
+- **Fase 3** (Escala): 8-12 semanas - Lo que se expandirá
+- **Fase 4** (Optimización): 4-6 semanas - Pruebas, entrenamiento, despliegue
+
+Para cada fase, lista 3-5 actividades o hitos específicos.
+
+## 5. INDICADORES CLAVE DE RENDIMIENTO (KPIs)
+Proporciona 7-10 KPIs específicos con:
+- **Nombre del KPI**: Métrica clara
+- **Línea Base Actual**: Estimación basada en sus respuestas
+- **Objetivo**: Meta de mejora específica
+- **Método de Medición**: Cómo se rastreará
+- **Cronograma**: Cuándo se logrará el objetivo
+
+Agrupa KPIs por categoría:
+- Eficiencia Operacional
+- Impacto Financiero
+- Calidad/Rendimiento
+- Satisfacción del Cliente/Usuario
+- Riesgo y Cumplimiento
+
+## 6. REQUERIMIENTOS DE DATOS
+Lista necesidades de datos específicas:
+- Datos históricos necesarios para análisis
+- Fuentes de datos en tiempo real a integrar
+- Requisitos de calidad de datos
+- Consideraciones de cumplimiento y seguridad
+- Sistemas existentes a conectar
+
+## 7. RIESGOS Y SUPUESTOS
+**Riesgos** (4-6 elementos):
+- Riesgos técnicos
+- Riesgos organizacionales
+- Desafíos de datos/integración
+- Riesgos de cronograma/recursos
+- Estrategias de mitigación para cada uno
+
+**Supuestos** (4-6 elementos):
+- Sobre recursos y apoyo del cliente
+- Sobre infraestructura existente
+- Sobre disponibilidad de stakeholders
+- Sobre acceso y calidad de datos
+
+## 8. IMPACTO ESTIMADO Y ROI
+Proporciona estimaciones específicas:
+- Ahorros de costos (anuales, %)
+- Mejoras de eficiencia (tiempo ahorrado, % de reducción)
+- Oportunidades de ingresos (si aplica)
+- Reducción de riesgos (cuantificada)
+- Cronograma de ROI y período de recuperación
+
+## 9. RECURSOS REQUERIDOS E INVERSIÓN
+- Composición del equipo necesaria
+- Costos de tecnología/software
+- Entrenamiento y gestión del cambio
+- Requisitos de soporte continuo
+
+## 10. PRÓXIMOS PASOS
+Acciones inmediatas en orden de prioridad (5-7 elementos):
+1. [Acción] - [Quién] - [Marco de Tiempo]
+2. [Acción] - [Quién] - [Marco de Tiempo]
+etc.
+
+Formato en markdown limpio. Sé ESPECÍFICO para ${industry}. Usa sus puntos de dolor y objetivos reales de las respuestas. Hazlo accionable e implementable.`
+      : `You are a senior digital transformation consultant with expertise in ${industry}. 
     
 Analyze the following business assessment and create a comprehensive, actionable transformation proposal.
 
